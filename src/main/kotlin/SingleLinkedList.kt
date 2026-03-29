@@ -2,7 +2,9 @@ package org.example
 
 class SingleLinkedList : CustomList {
 
-    private val inner = mutableListOf<Int>()
+    // don't use any java/kotlin internal datastructures like lists))
+    // write from scratch))
+
 
     override val size: Int
         get() = TODO("Implement this")
