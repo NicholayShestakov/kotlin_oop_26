@@ -13,6 +13,19 @@ class SingleLinkedListTest {
     }
 
     @Test
+    fun `size on empty list works`() {
+        assertEquals(0, list.size)
+    }
+
+    @Test
+    fun `add element`() {
+        list.add(1)
+
+        assertEquals(1, list.size)
+        assertEquals(1, list[0])
+    }
+
+    @Test
     fun `add elements`() {
         list.add(1)
         list.add(2)
@@ -25,12 +38,24 @@ class SingleLinkedListTest {
     }
 
     @Test
+    fun `addFirst works correctly on empty list`() {
+        list.addFirst(1)
+
+        assertEquals(1, list[0])
+    }
+
+    @Test
     fun `addFirst works correctly`() {
         list.add(2)
         list.addFirst(1)
 
         assertEquals(1, list[0])
         assertEquals(2, list[1])
+    }
+
+    @Test
+    fun `remove on empty list`() {
+        assertFalse(list.remove(42))
     }
 
     @Test
@@ -53,6 +78,11 @@ class SingleLinkedListTest {
         val removed = list.remove(3)
         assertFalse(removed)
         assertEquals(2, list.size)
+    }
+
+    @Test
+    fun `contains on empty list works`() {
+        assertFalse(list.contains(42))
     }
 
     @Test
@@ -85,14 +115,46 @@ class SingleLinkedListTest {
         }
     }
 
+    @Test
+    fun `get throws exception on empty list`() {
+        assertThrows(IndexOutOfBoundsException::class.java) {
+            list[0]
+        }
+    }
+
+    @Test
+    fun `indexOf gets -1 when element non exist`() {
+        assertEquals(-1, list.indexOf(42))
+    }
+
+    @Test
     fun `indexOf works`() {
         list.add(10)
         list.add(20)
         list.add(30)
 
-        assertEquals(2, list.indexOf(20))
+        assertEquals(1, list.indexOf(20))
     }
 
+    @Test
+    fun `set on empty list throws exception`() {
+        assertThrows(IndexOutOfBoundsException::class.java) {
+            list[0] = 42
+        }
+    }
+
+    @Test
+    fun `set with invalid index throws exception`() {
+        list.add(1)
+        list.add(2)
+        list.add(3)
+
+        assertThrows(IndexOutOfBoundsException::class.java) {
+            list[3] = 42
+        }
+    }
+
+    @Test
     fun `set works`() {
         list.add(10)
         list.add(20)
@@ -100,5 +162,34 @@ class SingleLinkedListTest {
 
         list[2] = 5
         assertEquals(5, list[2])
+    }
+
+    @Test
+    fun `iterator hasNext works`() {
+        list.add(1)
+
+        val iter = list.iterator()
+        assertTrue(iter.hasNext())
+    }
+
+    @Test
+    fun `iterator throws exception when is empty`() {
+        val iter = list.iterator()
+
+        assertThrows(IndexOutOfBoundsException::class.java) {
+            iter.next()
+        }
+    }
+
+    @Test
+    fun `iterator works`() {
+        list.add(1)
+        list.add(2)
+        list.add(3)
+
+        val iter = list.iterator()
+        assertEquals(1, iter.next())
+        assertEquals(2, iter.next())
+        assertEquals(3, iter.next())
     }
 }
