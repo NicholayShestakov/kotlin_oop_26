@@ -2,7 +2,7 @@ package org.example.list
 
 import kotlin.also
 
-class SingleLinkedList : CustomList {
+open class SingleLinkedList : CustomList {
 
     class Node {
         var value : Int = 0
