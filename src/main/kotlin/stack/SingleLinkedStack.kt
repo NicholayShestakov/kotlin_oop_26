@@ -1,6 +1,34 @@
 package org.example.stack
 
+import org.example.list.SingleLinkedList
 
-class SingleLinkedStack : Stack {
-    // TODO: have to inherit from SingleLinkedStack! Add inheritance before implementation!
+
+class SingleLinkedStack : Stack, SingleLinkedList() {
+
+    override fun push(value: Int) {
+        add(value)
+    }
+
+    override fun pop(): Int {
+        try {
+            val popped = get(size - 1)
+            remove(get(size - 1))
+            return popped
+        } catch (_: IndexOutOfBoundsException) {
+            throw NoSuchElementException()
+        }
+    }
+
+    override fun peek(): Int {
+        try {
+            return get(size - 1)
+        } catch (_: IndexOutOfBoundsException) {
+            throw NoSuchElementException()
+        }
+    }
+
+    override val isEmpty: Boolean
+        get() {
+            return begin == null
+        }
 }
